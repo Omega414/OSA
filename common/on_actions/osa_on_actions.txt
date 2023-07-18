@@ -1,0 +1,235 @@
+on_game_start = {
+	events = {
+		prob.1
+		osa_flag.0
+	}
+}
+
+# This = country
+on_monthly_pulse_country = {
+	events = {
+		eac_pdf_events.1
+		osa_sprawl.1
+		osa_sprawl.2
+	}
+}
+
+# No scope, like on_game_start
+on_monthly_pulse = {
+	events = {
+		eac_at_war.100 # cannon
+	}
+}
+
+on_yearly_pulse_country = {
+	events = {
+		eac_pdf_events.85
+	}
+}
+
+
+# This = Country
+on_tech_increased = {
+	events = {
+        eac_pdf_events.3  
+    }
+}
+
+# This = owner of fleet 1 (winner)
+# From = owner of fleet 2 (loser)
+# FromFrom = fleet 1
+# FromFromFrom = fleet 2
+on_space_battle_won = {
+	events = {
+		eac_pdf_events.82 # fleet stance system
+		eac_pdf_events.93 # fleet stance planet
+	}
+}
+
+# This = owner of fleet 1 (destroyed)
+# From = owner of fleet 2 (combatant)
+# FromFrom = fleet 1
+# FromFromFrom = fleet 2
+on_fleet_destroyed_victim = {
+	events = {
+		eac_pdf_events.84
+	}
+}
+
+# This = owner of ship 1 (destroyed)
+# From = owner of ship 2 (combatant)
+# FromFrom = ship 1
+# FromFromFrom = ship 2
+on_ship_destroyed_victim = {
+	events = {
+		eac_pdf_events.96
+	}
+}
+
+# This = owner of fleet
+# From = disbanded fleet
+on_fleet_disbanded = {
+	events = {
+		eac_pdf_events.83
+	}
+}
+
+# This = Ship
+# From = Disabler Ship
+on_ship_disabled = {
+	events = {
+		eac_pdf_events.95
+	}
+}
+
+# This = owner of fleet
+# From = fleet
+# FromFrom = planet (if any)
+on_fleet_auto_move_arrival = {
+	events = {
+		eac_pdf_events.94
+	}
+}
+
+# This = Planet
+on_building_complete = {
+	events = {
+		eac_pdf_events.4
+	}
+}
+
+# This = Planet
+on_building_demolished = {
+	events = {
+		eac_pdf_events.5
+	}
+}
+
+# This = Planet
+on_building_replaced = {
+	events = {
+		eac_pdf_events.5
+	}
+}
+
+# A fleet has entered a system
+# Scope = Fleet
+# From = System
+on_entering_system_fleet = {
+	events = {
+		eac_pdf_events.80 # system stance
+		eac_pdf_events.90 # planet stance - colossus
+    }
+}
+
+#From = Planet scope
+#This = Fleet scope
+on_fleet_enter_orbit = {
+	events = {
+		eac_at_war.80
+		eac_pdf_events.91
+		eac_pdf_events.92
+	}
+}
+
+# Planet has reached 0 health from orbital bombardment
+# This = Planet
+# From = Bombarder
+on_planet_bombarded = {
+	events = {
+		prob.2
+		prob.4
+		prob.5
+	}
+}
+
+# Planet has reached 0 pops from orbital bombardment
+# This = Planet
+# From = Bombarder
+on_planet_zero_pops = {
+	events = {
+		prob.6
+		prob.8
+		mem_planetary_shields.2
+		mem_planetary_shields.4
+		mem_planetary_shields.5
+	}
+}
+
+# A planets controller becomes a country not the same as the owner.
+# Root = Planet
+# From = Planet Owner
+# FromFrom = Planet Controller (the one occupying)
+on_planet_occupied = {
+	events = {
+		osa_colony.1
+	}
+}
+
+# A war has ended
+# Root = Loser
+# From = Main Winner
+on_war_ended = {
+	events = {
+		prob.9
+	}
+}
+
+#An army has been killed in ground combat
+# This = owner
+# From = army
+# FromFrom = opponent
+# FromFromFrom = planet
+on_army_killed_in_combat = {
+	events = {
+		imperator.1
+	}
+}
+
+#An army has ceased to exist for any other reason
+# This = country
+# From = army
+on_army_killed_no_combat = {
+	events = {
+		imperator.1
+	}
+}
+
+# Executed as a leader is hired 
+# This = Leader
+on_leader_hired = {
+	events = {
+		osa_civic.1
+		osa_civic.3
+		osa_civic.5
+		osa_civic.7
+		osa_civic.9
+		tr_academy.1
+		tr_academy.2
+		tr_academy.3
+		tr_academy.4
+		tr_academy.5
+	}
+}
+
+# Executed just as country is changing its government, after the new one is applied
+# THIS = country
+on_post_government_changed = {
+	events = {
+		osa_civic.2
+		osa_civic.4
+		osa_civic.6
+		osa_civic.8
+		osa_civic.10
+	}
+}
+
+on_game_start_country = {
+	events = {
+		osa_civic.2
+		osa_civic.4
+		osa_civic.6
+		osa_civic.8
+		osa_civic.10
+	}
+}

@@ -1,0 +1,179 @@
+eac_tech_planetary_defense_force = {
+	cost = 0
+	tier = 0
+	start_tech = yes
+	area = engineering
+	category = { voidcraft }	
+	prerequisites = { "tech_corvettes" }
+
+}
+
+eac_tech_patrol_craft_1 = {
+	cost = 0
+	tier = 0
+	start_tech = yes
+	area = engineering
+	category = { voidcraft }	
+	prerequisites = { "tech_corvettes" }
+
+	prereqfor_desc = {
+		ship = {
+			title = "EAC_TECH_UNLOCK_PATROL_CRAFT_1_CONSTRUCTION_TITLE"
+			desc = "EAC_TECH_UNLOCK_PATROL_CRAFT_1_CONSTRUCTION_DESC"
+		}
+	}	
+}
+
+eac_tech_patrol_craft_2 = {
+	cost = @tier3cost2
+	tier = 3
+	area = engineering
+	category = { voidcraft }	
+    prerequisites = { "eac_tech_patrol_craft_hull_2" "tech_cruisers" }
+    weight = @tier3weight2
+
+	prereqfor_desc = {
+		ship = {
+			title = "EAC_TECH_UNLOCK_PATROL_CRAFT_2_CONSTRUCTION_TITLE"
+			desc = "EAC_TECH_UNLOCK_PATROL_CRAFT_2_CONSTRUCTION_DESC"
+		}
+	}	
+
+    weight_modifier = {
+		factor = 5
+	}
+	
+	ai_weight = {
+		factor = 3 # ship upgrades are supposed to be good!
+	}
+}
+
+eac_tech_patrol_craft_hull_1 = {
+	cost = @tier1cost3
+	tier = 1
+	area = engineering
+	category = { voidcraft }	
+    prerequisites = { "tech_destroyers" }
+    weight = @tier1weight3
+
+    modifier = {
+        shipsize_eac_pdf_patrol_craft_1_hull_add = 150
+    }
+
+    weight_modifier = {
+	}
+	
+	ai_weight = {
+		factor = 3 # ship upgrades are supposed to be good!
+	}
+}
+
+eac_tech_patrol_craft_hull_2 = {
+	cost = @tier2cost1
+	tier = 2
+	area = engineering
+	category = { voidcraft }	
+    prerequisites = { "eac_tech_patrol_craft_hull_1" }
+    weight = @tier2weight1
+	is_rare = yes
+
+    modifier = {
+        shipsize_eac_pdf_patrol_craft_1_hull_add = 150
+    }
+
+	potential = {
+		NOT = { has_technology = eac_tech_patrol_craft_2 }
+	}
+
+	weight_modifier = {
+	}
+	
+	ai_weight = {
+		factor = 3 # ship upgrades are supposed to be good!
+	}
+}
+
+eac_tech_patrol_craft_hull_3 = {
+	cost = @tier4cost3
+	tier = 4
+	area = engineering
+	category = { voidcraft }	
+    prerequisites = { "eac_tech_patrol_craft_2" }
+    weight = @tier4weight3
+	is_rare = yes
+
+    modifier = {
+        shipsize_eac_pdf_patrol_craft_2_hull_add = 250
+		shipsize_eac_pdf_patrol_craft_2_evasion_mult = 0.25
+    }
+
+    weight_modifier = {
+	}
+	
+	ai_weight = {
+		factor = 3 # ship upgrades are supposed to be good!
+	}
+}
+
+eac_tech_patrol_craft_hull_4 = {
+	cost = @tier4cost1
+	tier = 4
+	area = engineering
+	category = { voidcraft }	
+    prerequisites = { "eac_tech_patrol_craft_hull_3" }
+    weight = @tier4weight1
+	is_rare = yes
+
+    modifier = {
+        shipsize_eac_pdf_patrol_craft_2_hull_add = 250
+		shipsize_eac_pdf_patrol_craft_2_evasion_mult = 0.5
+    }
+
+    weight_modifier = {
+	}
+	
+	ai_weight = {
+		factor = 3 # ship upgrades are supposed to be good!
+	}
+}
+
+eac_tech_patrol_craft_build_speed_1 = {
+	cost = @tier4cost2
+	area = engineering
+	tier = 4
+	category = { voidcraft }
+	prerequisites = { "eac_tech_patrol_craft_2" }
+	weight = @tier4weight2
+	
+	modifier = {
+		shipsize_eac_pdf_patrol_craft_2_build_speed_mult = 0.25
+		shipsize_destroyer_tracking_mult = 0.25
+	}
+
+	weight_modifier = {
+	}
+	
+	ai_weight = {
+	}
+}
+
+eac_tech_patrol_craft_build_speed_2 = {
+	cost = @tier4cost1
+	area = engineering
+	tier = 4
+	category = { voidcraft }
+	prerequisites = { "eac_tech_patrol_craft_build_speed_1" }
+	weight = @tier4weight1
+	is_rare = yes
+	
+	modifier = {
+		shipsize_eac_pdf_patrol_craft_2_build_speed_mult = 0.25
+		shipsize_destroyer_tracking_mult = 0.50
+	}
+
+	weight_modifier = {
+	}
+	
+	ai_weight = {
+	}
+}

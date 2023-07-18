@@ -1,0 +1,12 @@
+
+swarm_armies = {
+	if = {
+		limit = { exists = event_target:prethoryn }
+		event_target:prethoryn = {
+			if = {
+				limit = { num_armies > 0 }
+				every_owned_army = { remove_army = yes }
+			}
+		}
+	}
+}

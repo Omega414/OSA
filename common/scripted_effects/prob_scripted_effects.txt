@@ -1,0 +1,111 @@
+
+prob_glass_planet = {
+	prob_pre_making_planet_uninhabitable = yes
+	change_pc = pc_molten
+	prob_post_making_planet_uninhabitable = yes
+	set_planet_flag = prob_glassed_planet
+	add_modifier = { modifier = prob_glassed_planet  days = -1 }
+	planet_event = { id = prob.7  days = 360 }
+}
+
+prob_pre_making_planet_uninhabitable = {
+	every_owned_pop = { kill_pop = yes }  # manually kill all pops to refresh planet portrait
+}
+
+prob_post_making_planet_uninhabitable = {
+	every_planet_army = { remove_army = yes }
+	destroy_colony = yes
+	reset_planet = yes
+	clear_deposits = yes
+	clear_planet_modifiers = yes
+	remove_all_districts = yes
+	remove_all_buildings = yes
+	close_branch_office = yes
+	add_planet_devastation = -1000
+}
+
+prob_pre_pseudo_terraforming = {
+	remove_modifier = natural_beauty
+	remove_modifier = atmospheric_aphrodisiac
+	remove_modifier = atmospheric_hallucinogen
+	remove_modifier = lush_planet
+	remove_modifier = dangerous_wildlife
+	every_deposit = {
+		limit = { is_deposit_type = prob_d_bombarded_land }
+		remove_deposit = yes
+		prev = {
+			change_variable = {
+				which = prob_d_bombarded_land_counter
+				value = 1
+			}
+		}
+	}
+}
+
+prob_post_pseudo_terraforming = {
+	while = {
+		count = prob_d_bombarded_land_counter
+		add_deposit = prob_d_bombarded_land
+	}
+	set_variable = {
+		which = prob_d_bombarded_land_counter
+		value = 0
+	}
+}
+
+prob_add_blocker = {
+	every_deposit = {
+		limit = { is_deposit_type = prob_d_bombarded_land }
+		prev = {
+			change_variable = {
+				which = prob_d_bombarded_land_counter
+				value = 1
+			}
+		}
+	}
+
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					planet_devastation >= 75
+					check_variable = {
+						which = prob_d_bombarded_land_counter
+						value < 3
+					}
+				}
+				AND = {
+					planet_devastation >= 50
+					check_variable = {
+						which = prob_d_bombarded_land_counter
+						value < 2
+					}
+				}
+				AND = {
+					planet_devastation >= 25
+					check_variable = {
+						which = prob_d_bombarded_land_counter
+						value < 1
+					}
+				}
+			}
+		}
+		add_deposit = prob_d_bombarded_land
+	}
+
+	set_variable = {
+		which = prob_d_bombarded_land_counter
+		value = 0
+	}
+}
+
+prob_remove_fe_opinion_modifiers = {
+	remove_opinion_modifier = { modifier = opinion_refused_fallen_empire_request  who = $WHO$ }
+	remove_opinion_modifier = { modifier = opinion_refused_fallen_empire_task  who = $WHO$ }
+	remove_opinion_modifier = { modifier = opinion_failed_fallen_empire_task  who = $WHO$ }
+	remove_opinion_modifier = { modifier = opinion_majorly_failed_fallen_empire_task  who = $WHO$ }
+	remove_opinion_modifier = { modifier = opinion_spurned_fallen_empire_gift  who = $WHO$ }
+	remove_opinion_modifier = { modifier = opinion_refused_fallen_empire_demand  who = $WHO$ }
+	remove_opinion_modifier = { modifier = opinion_insult  who = $WHO$ }
+	remove_opinion_modifier = { modifier = opinion_declared_war  who = $WHO$ }
+}

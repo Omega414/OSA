@@ -1,0 +1,281 @@
+###################
+# Basic Jobs
+###################
+
+eac_military_officer_energy = {
+	category = specialist
+	condition_string = SPECIALIST_JOB_TRIGGER
+	building_icon = eac_building_planetary_proton_cannon
+	clothes_texture_index = 4
+	
+	possible_precalc = can_fill_specialist_job
+
+	pop_modifier = {
+		pop_defense_armies_add = 1
+	}	
+
+	resources = {
+		category = planet_soldiers
+		produces = {
+			physics_research = 3
+		}
+		upkeep = {
+			energy = 2
+			minerals = 1
+		}
+	}	
+
+	weight = {
+		weight = @specialist_job_weight
+		modifier = {
+			factor = 0.2
+			has_citizenship_rights = no	
+			NOT = { has_trait = trait_mechanical }
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_natural_physicists
+		}
+		modifier = {
+			factor = 0.1
+			can_take_servant_job = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_job = eac_military_officer_energy
+		}		
+	}
+}
+
+eac_military_officer_kinetic = {
+	category = specialist
+	condition_string = SPECIALIST_JOB_TRIGGER
+	building_icon = eac_building_coilgun_batteries
+	clothes_texture_index = 4
+	
+	possible_precalc = can_fill_specialist_job
+
+	pop_modifier = {
+		pop_defense_armies_add = 1
+	}	
+
+	resources = {
+		category = planet_soldiers
+		produces = {
+			engineering_research = 3
+		}
+		upkeep = {
+			energy = 1
+			minerals = 2
+		}
+	}	
+
+	weight = {
+		weight = @specialist_job_weight
+		modifier = {
+			factor = 0.2
+			has_citizenship_rights = no	
+			NOT = { has_trait = trait_mechanical }
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_natural_engineers
+		}
+		modifier = {
+			factor = 1.5
+			has_job = eac_military_officer_kinetic
+		}		
+	}
+}
+
+eac_military_drone_energy = {
+	category = complex_drone
+	condition_string = DRONE_JOB_TRIGGER
+	building_icon = eac_building_planetary_proton_cannon
+	clothes_texture_index = 4
+	
+	possible_precalc = can_fill_drone_job
+
+	pop_modifier = {
+		pop_defense_armies_add = 1
+	}	
+
+	resources = {
+		category = planet_soldiers
+		produces = {
+			physics_research = 3
+		}
+		upkeep = {
+			energy = 2
+			minerals = 1
+		}
+	}	
+
+	weight = {
+		weight = @complex_drone_job_weight
+		modifier = {
+			factor = 0.2
+			has_citizenship_rights = no	
+			NOT = { has_trait = trait_mechanical }
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_natural_physicists
+		}
+		modifier = {
+			factor = 0.1
+			can_take_servant_job = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_job = eac_military_drone_energy
+		}		
+	}
+}
+
+eac_military_drone_kinetic = {
+	category = complex_drone
+	condition_string = DRONE_JOB_TRIGGER
+	building_icon = eac_building_coilgun_batteries
+	clothes_texture_index = 4
+	
+	possible_precalc = can_fill_drone_job
+
+	pop_modifier = {
+		pop_defense_armies_add = 1
+	}	
+
+	resources = {
+		category = planet_soldiers
+		produces = {
+			engineering_research = 3
+		}
+		upkeep = {
+			energy = 1
+			minerals = 2
+		}
+	}	
+
+	weight = {
+		weight = @complex_drone_job_weight
+		modifier = {
+			factor = 0.2
+			has_citizenship_rights = no	
+			NOT = { has_trait = trait_mechanical }
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_natural_engineers
+		}
+		modifier = {
+			factor = 0.1
+			can_take_servant_job = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_job = eac_military_drone_kinetic
+		}		
+	}
+}
+
+eac_pdf_shipbuilder = {
+	category = specialist
+	condition_string = SPECIALIST_JOB_TRIGGER
+	building_icon = building_eac_pdf_base
+	clothes_texture_index = 4
+	
+	possible_precalc = can_fill_specialist_job
+
+	pop_modifier = {
+		pop_defense_armies_add = 1
+	}	
+
+	resources = {
+		category = planet_shipbuilders
+		produces = {
+			physics_research = 2.5
+			engineering_research = 2.5
+			unity = 2.5
+		}
+		upkeep = {
+			energy = 2
+			alloys = 2
+		}
+	}	
+
+	weight = {
+		weight = @specialist_job_weight
+		modifier = {
+			factor = 0.2
+			has_citizenship_rights = no	
+			NOT = { has_trait = trait_mechanical }
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_natural_engineers
+		}
+		modifier = {
+			factor = 0.1
+			can_take_servant_job = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_job = eac_pdf_shipbuilder
+		}		
+	}
+}
+
+eac_pdf_drone_shipbuilder = {
+	category = complex_drone
+	condition_string = DRONE_JOB_TRIGGER
+	building_icon = building_eac_pdf_base
+	clothes_texture_index = 4
+	
+	possible_precalc = can_fill_drone_job
+
+	pop_modifier = {
+		pop_defense_armies_add = 1
+	}	
+
+	resources = {
+		category = planet_shipbuilders
+		produces = {
+			physics_research = 2.5
+			engineering_research = 2.5
+			unity = 2.5
+		}
+		upkeep = {
+			energy = 2
+			alloys = 2
+		}
+	}	
+
+	weight = {
+		weight = @complex_drone_job_weight
+		modifier = {
+			factor = 0.2
+			has_citizenship_rights = no	
+			NOT = { has_trait = trait_mechanical }
+		}
+		modifier = {
+			factor = 1.75
+			OR = {
+				has_trait = trait_robot_logic_engines
+				has_trait = trait_intelligent
+				has_trait = trait_brainslug
+			}
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_natural_physicists
+		}
+		modifier = {
+			factor = 0.1
+			can_take_servant_job = yes
+		}
+		modifier = {
+			factor = 1.5
+			has_job = eac_pdf_drone_shipbuilder
+		}		
+	}
+}

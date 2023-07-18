@@ -1,0 +1,21 @@
+
+prob_rivalry = {
+	show_in_diplomacy = no
+	show_notification = no
+	potential = {
+		is_country_type = default
+		has_policy_flag = unrestricted_wars
+		OR = {
+			is_militarist = yes
+			has_ethic = ethic_gestalt_consciousness
+			AND = {
+				is_xenophobe = yes
+				is_pacifist = no
+			}
+		}
+	}
+	is_valid = {
+		is_rival = from
+		has_total_war_cb = no
+	}
+}

@@ -1,0 +1,456 @@
+
+namespace = prob
+
+event = {
+	id = prob.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_global_flag = prob_global_flag
+	}
+}
+
+# planet captured
+planet_event = {
+	id = prob.2
+	hide_window = yes
+	is_triggered_only = yes
+
+ 	pre_triggers = {
+		has_ground_combat = no
+	}
+
+	trigger = {
+		NOR = {
+			has_planet_flag = prob_full_immunity
+			is_planet_class = pc_infested
+			is_planet_class = pc_cybrex
+			is_planet_class = pc_ai
+		}
+		has_orbital_bombardment_stance = selective
+		planet_devastation >= 50
+		count_planet_army = { count = 0 }
+	}
+
+	immediate = {
+		# save event targets
+		FROM = { save_event_target_as = prob_bombarder }
+		save_event_target_as = prob_planet_under_bombardment
+		owner = { save_event_target_as = prob_owner_of_planet }
+		controller = { save_event_target_as = prob_controller_of_planet }
+		solar_system = { save_event_target_as = prob_system_under_bombardment }
+
+		# report: captured a primitive
+		if = {
+			limit = { event_target:prob_owner_of_planet = { is_country_type = primitive } }
+			event_target:prob_bombarder = { country_event = { id = prob_notice.300 } }
+			set_controller = event_target:prob_bombarder
+			set_owner = event_target:prob_bombarder
+			add_modifier = {
+				modifier = planet_culture_shock
+				years = 10
+			}
+		}
+		# report: regained a colony
+		else_if = {
+			limit = {
+				event_target:prob_owner_of_planet = { is_same_value = event_target:prob_bombarder }
+			}
+			event_target:prob_bombarder = { country_event = { id = prob_notice.6 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.206 } }
+			set_controller = event_target:prob_bombarder
+		}
+		# report: captured a colony
+		else = {
+			event_target:prob_bombarder = { country_event = { id = prob_notice.5 } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.105 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.205 } }
+			create_army = {
+				type = occupation_army
+				species = event_target:prob_bombarder.owner_species
+				owner = event_target:prob_bombarder
+			}
+			planet_event = {
+				id = prob.3
+				days = 1
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = prob.3
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		remove_all_armies = yes
+	}
+}
+
+# tile blocker creator
+planet_event = {
+	id = prob.4
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		NOR = {
+			has_planet_flag = prob_full_immunity
+			has_planet_flag = prob_tile_blocker_cooldown
+			is_planet_class = pc_infested
+			is_planet_class = pc_cybrex
+			is_planet_class = pc_ai
+		}
+		OR = {
+			has_orbital_bombardment_stance = indiscriminate
+			has_orbital_bombardment_stance = pox
+			has_orbital_bombardment_stance = armageddon
+		}
+	}
+
+	immediate = {
+		set_timed_planet_flag = { flag = prob_tile_blocker_cooldown  days = 10 }
+
+		prob_add_blocker = yes
+
+		if = {
+			limit = { FROM = { has_modifier = javorian_pox } }
+			set_timed_planet_flag = { flag = prob_javorian_pox  days = 10 }
+		}
+	}
+}
+
+# orbital terraforming
+planet_event = {
+	id = prob.5
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		NOR = {
+			has_planet_flag = prob_full_immunity
+			is_planet_class = pc_infested
+			is_planet_class = pc_cybrex
+			is_planet_class = pc_ai
+			is_ringworld = yes
+			has_planet_flag = megastructure
+			is_planet_class = pc_machine
+			is_planet_class = pc_city
+			is_planet_class = pc_relic
+			is_planet_class = pc_hive
+			is_planet_class = pc_nuked
+		}
+		NOR = {
+			has_building = building_mem_planetary_shield_generator
+			has_building = building_planetary_shield_generator
+			has_building = building_mem_planetary_shield_generator_heavy
+			has_building = building_mem_planetary_shield_generator_orila
+		}
+		has_orbital_bombardment_stance = armageddon
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				planet_devastation >= 95
+				NOT = { has_planet_flag = prob_immue_to_planet_nuking }
+			}
+			prob_pre_pseudo_terraforming = yes
+			change_pc = pc_nuked
+			prob_post_pseudo_terraforming = yes
+			set_planet_flag = armageddon_nuked  # prevent pc_nuked unique events from happening
+		}
+		else_if = {
+			limit = {
+				planet_devastation >= 75
+				OR = {
+					is_planet_class = pc_gaia
+					has_planet_flag = prob_should_be_downgraded_by_devastation
+				}
+			}
+			prob_pre_pseudo_terraforming = yes
+			random_list = {
+				3 = { change_pc = pc_tropical }
+				2 = { change_pc = pc_continental }
+				3 = { change_pc = pc_ocean }
+				7 = { change_pc = pc_desert }
+				7 = { change_pc = pc_arid }
+				7 = { change_pc = pc_savannah }
+				7 = { change_pc = pc_tundra }
+				7 = { change_pc = pc_arctic }
+				7 = { change_pc = pc_alpine }
+			}
+			prob_post_pseudo_terraforming = yes
+		}
+	}
+}
+
+# planet glassing
+planet_event = {
+	id = prob.6
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		NOR = {
+			has_planet_flag = prob_full_immunity
+			has_planet_flag = prob_daily_damage_cooldown
+			is_planet_class = pc_infested
+			is_planet_class = pc_cybrex
+			is_planet_class = pc_ai
+		}
+		has_orbital_bombardment_stance = armageddon
+		planet_devastation >= 100
+		FROM = {
+			NOR = {
+				# vanilla: 100%+ devastation -> pc_barren(_cold)
+				is_country_type = extradimensional
+				is_country_type = extradimensional_2
+				is_country_type = extradimensional_3
+				# vanilla: 100%+ devastation -> pc_gray_goo
+				is_country_type = gray_goo
+			}
+		}
+	}
+
+	immediate = {
+		set_timed_planet_flag = { flag = prob_colony_destroyed_by_devastation  days = 10 }
+
+		# turn into a damaged ring if it's a ringworld
+		if = {
+			limit = { is_ringworld = yes }
+			spawn_ringworld_cracker_effect = yes
+			prob_pre_making_planet_uninhabitable = yes
+			change_pc = pc_ringworld_habitable_damaged
+			prob_post_making_planet_uninhabitable = yes
+			set_planet_flag = prob_ringworld_destroyed
+		}
+		# destroy the whole planet if it's a habitat
+		else_if = {
+			limit = { has_planet_flag = megastructure }
+			remove_planet_flag = megastructure
+			remove_planet_flag = habitat
+			set_planet_flag = prob_habitat_destroyed
+			# remove planet later
+		}
+		# glass the planet if it's capable
+		else_if = {
+			limit = {
+				NOR = {
+					has_planet_flag = prob_immue_to_planet_glassing
+					from = { is_country_type = swarm }
+				}
+			}
+			prob_glass_planet = yes
+		}
+		# depopulate it
+		else = {
+			destroy_colony = yes
+			remove_all_buildings = yes
+			remove_all_districts = yes
+			add_planet_devastation = -1000
+		}
+
+		# save event targets
+		FROM = { save_event_target_as = prob_bombarder }
+		save_event_target_as = prob_planet_under_bombardment
+		owner = { save_event_target_as = prob_owner_of_planet }
+		controller = { save_event_target_as = prob_controller_of_planet }
+		solar_system = { save_event_target_as = prob_system_under_bombardment }
+
+		# report: primitive glassed
+		if = {
+			limit = { event_target:prob_owner_of_planet = { is_country_type = primitive } }
+			remove_planet_flag = prob_ringworld_destroyed
+			event_target:prob_bombarder = { country_event = { id = prob_notice.302 } }
+		}
+		# report: ringworld destroyed
+		else_if = {
+			limit = { has_planet_flag = prob_ringworld_destroyed }
+			event_target:prob_bombarder = { country_event = { id = prob_notice.4 } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.104 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.204 } }
+			remove_planet_flag = prob_ringworld_destroyed
+		}
+		# report: habitat destroyed
+		else_if = {
+			limit = { has_planet_flag = prob_habitat_destroyed }
+			event_target:prob_bombarder = { country_event = { id = prob_notice.3 } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.103 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.203 } }
+		}
+		# report: colony infested by swarm
+		else_if = {
+			limit = { from = { is_country_type = swarm } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.401 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.402 } }
+			prob_pre_making_planet_uninhabitable = yes
+			change_pc = pc_infested
+			prob_post_making_planet_uninhabitable = yes
+			set_owner = from
+			planet_event = { id = crisis.215 }
+		}
+		# report: planet glassed
+		else = {
+			event_target:prob_bombarder = { country_event = { id = prob_notice.2 } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.102 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.202 } }
+		}
+		# remove habitat destroyed this way
+		if = {
+			limit = { has_planet_flag = prob_habitat_destroyed }
+			spawn_habitat_cracker_effect = yes
+			remove_planet = yes
+		}
+	}
+}
+
+# glassed planet cooldown
+planet_event = {
+	id = prob.7
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_planet_flag = prob_glassed_planet
+	}
+
+	immediate = {
+		remove_planet_flag = prob_glassed_planet
+		remove_modifier = prob_glassed_planet
+		if = {
+			limit = { is_planet_class = pc_molten }
+			change_pc = pc_barren
+			reset_planet = yes
+			clear_deposits = yes
+			clear_planet_modifiers = yes
+			add_modifier = {
+				modifier = terraforming_candidate
+				days = -1
+			}
+		}
+	}
+}
+
+# planet depopulated
+planet_event = {
+	id = prob.8
+	hide_window = yes
+	is_triggered_only = yes
+
+ 	pre_triggers = {
+		has_owner = yes
+	}
+
+	trigger = {
+		NOR = {
+			has_planet_flag = prob_full_immunity
+			has_planet_flag = prob_colony_destroyed_by_devastation
+			is_planet_class = pc_infested
+			is_planet_class = pc_cybrex
+			is_planet_class = pc_ai
+		}
+		FROM = {
+			NOR = {
+				# vanilla: 100%+ devastation -> pc_barren(_cold)
+				is_country_type = extradimensional
+				is_country_type = extradimensional_2
+				is_country_type = extradimensional_3
+				# vanilla: 100%+ devastation -> pc_gray_goo
+				is_country_type = gray_goo
+			}
+		}
+	}
+
+	immediate = {
+		# save event targets
+		FROM = { save_event_target_as = prob_bombarder }
+		save_event_target_as = prob_planet_under_bombardment
+		owner = { save_event_target_as = prob_owner_of_planet }
+		controller = { save_event_target_as = prob_controller_of_planet }
+		solar_system = { save_event_target_as = prob_system_under_bombardment }
+
+		# report: primitive destroyed
+		if = {
+			limit = { event_target:prob_owner_of_planet = { is_country_type = primitive } }
+			event_target:prob_bombarder = { country_event = { id = prob_notice.301 } }
+			remove_all_buildings = yes
+			remove_all_districts = yes
+		}
+		# report: habitat destroyed
+		else_if = {
+			limit = {
+				is_ringworld = no
+				has_planet_flag = megastructure
+			}
+			spawn_habitat_cracker_effect = yes
+			remove_planet = yes
+			event_target:prob_bombarder = { country_event = { id = prob_notice.3 } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.103 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.203 } }
+		}
+		# report: colony infested by swarm
+		else_if = {
+			limit = { from = { is_country_type = swarm } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.401 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.402 } }
+			prob_pre_making_planet_uninhabitable = yes
+			change_pc = pc_infested
+			prob_post_making_planet_uninhabitable = yes
+			set_owner = from
+			planet_event = { id = crisis.215 }
+		}
+		# report: generic colony destroyed
+		else = {
+			event_target:prob_bombarder = { country_event = { id = prob_notice.1 } }
+			event_target:prob_owner_of_planet = { country_event = { id = prob_notice.101 } }
+			event_target:prob_controller_of_planet = { country_event = { id = prob_notice.201 } }
+			remove_all_buildings = yes
+			remove_all_districts = yes
+		}
+	}
+}
+
+# on war ended
+country_event = {
+	id = prob.9
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			is_scope_valid = yes
+		}
+	}
+
+	immediate = {
+		root = {
+			set_timed_country_flag = { flag = ai_no_wars  days = 3600 }
+			prob_remove_fe_opinion_modifiers = { WHO = from }
+		}
+		from = {
+			set_timed_country_flag = { flag = ai_no_wars  days = 3600 }
+			prob_remove_fe_opinion_modifiers = { WHO = root }
+			if = {
+				limit = {
+					root = { is_criminal_syndicate = yes }
+				}
+				every_owned_planet = {
+					limit = {
+						has_branch_office = yes
+						branch_office_owner = { is_same_value = root }
+					}
+					close_branch_office = yes
+				}
+				root = {
+					set_timed_country_flag = {
+						flag = prob_no_criminal_branch@from
+						days = 3600
+					}
+				}
+			}
+		}
+	}
+}

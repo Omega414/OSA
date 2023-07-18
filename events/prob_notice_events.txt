@@ -1,0 +1,465 @@
+
+namespace = prob_notice
+
+# notice bombarder: destroyed a colony (depopulated)
+country_event = {
+	id = prob_notice.1
+	title = prob.colony_depopulated.bombarder.name
+	desc = prob.colony_depopulated.bombarder.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_city_ruins
+	show_sound = event_super_explosion
+
+	immediate = {
+		add_threat = {
+			who = event_target:prob_bombarder
+			amount = 0.1
+		}
+	}
+
+	option = {
+		name = OK
+	}
+}
+
+# notice bombarder: destroyed a colony (glassed)
+country_event = {
+	title = prob.colony_glassed.bombarder.name
+	desc = prob.colony_glassed.bombarder.desc
+	id = prob_notice.2
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_prob_molten_planet
+	show_sound = event_prob_molten_planet
+
+	immediate = {
+		add_threat = {
+			who = event_target:prob_bombarder
+			amount = 0.2
+		}
+	}
+
+	option = {
+		name = OK
+	}
+}
+
+# notice bombarder: destroyed a habitat
+country_event = {
+	title = prob.habitat_destroyed.bombarder.name
+	desc = prob.habitat_destroyed.bombarder.desc
+	id = prob_notice.3
+	is_triggered_only = yes
+	location = event_target:prob_system_under_bombardment
+
+	picture = GFX_evt_large_explosion
+	show_sound = event_ship_explosion
+
+	immediate = {
+		add_threat = {
+			who = event_target:prob_bombarder
+			amount = 0.2
+		}
+	}
+
+	option = {
+		name = OK
+	}
+}
+
+# notice bombarder: destroyed a ringworld section
+country_event = {
+	id = prob_notice.4
+	title = prob.ringworld_destroyed.bombarder.name
+	desc = prob.ringworld_destroyed.bombarder.desc
+	is_triggered_only = yes
+	location = event_target:prob_system_under_bombardment
+
+	picture = GFX_evt_megastructure_construction
+	show_sound = event_super_explosion
+
+	immediate = {
+		add_threat = {
+			who = event_target:prob_bombarder
+			amount = 0.2
+		}
+	}
+
+	option = {
+		name = OK
+	}
+}
+
+# notice bombarder: captured a colony
+country_event = {
+	id = prob_notice.5
+	title = prob.colony_captured.bombarder.name
+	desc = prob.colony_captured.bombarder.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_ground_combat
+	show_sound = event_ground_battle
+
+	trigger = {
+		NOT = { is_same_value = event_target:prob_owner_of_planet }
+	}
+
+	option = {
+		name = OK
+	}
+}
+
+# notice bombarder: captured a colony (owner)
+country_event = {
+	id = prob_notice.6
+	title = prob.colony_regained.bombarder.name
+	desc = prob.colony_regained.bombarder.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_ground_combat
+	show_sound = event_ground_battle
+
+	option = {
+		name = OK
+	}
+}
+
+# notice planet previous owner: a colony is lost (depopulated)
+country_event = {
+	id = prob_notice.101
+	title = prob.colony_depopulated.owner.name
+	desc = prob.colony_depopulated.owner.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_city_ruins
+	show_sound = event_super_explosion
+
+	immediate = {
+		add_static_war_exhaustion = {
+			attacker = event_target:prob_bombarder
+			location = event_target:prob_planet_under_bombardment
+			value_for_planet_destruction = 1.0
+		}
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous owner: a colony is lost (glassed)
+country_event = {
+	id = prob_notice.102
+	title = prob.colony_glassed.owner.name
+	desc = prob.colony_glassed.owner.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_prob_molten_planet
+	show_sound = event_prob_molten_planet
+
+	immediate = {
+		add_static_war_exhaustion = {
+			attacker = event_target:prob_bombarder
+			location = event_target:prob_planet_under_bombardment
+			value_for_planet_destruction = 1.5
+		}
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous owner: a habitat is lost
+country_event = {
+	id = prob_notice.103
+	title = prob.habitat_destroyed.owner.name
+	desc = prob.habitat_destroyed.owner.desc
+	is_triggered_only = yes
+	location = event_target:prob_system_under_bombardment
+
+	picture = GFX_evt_large_explosion
+	show_sound = event_ship_explosion
+
+	immediate = {
+		add_static_war_exhaustion = {
+			attacker = event_target:prob_bombarder
+			location = event_target:prob_system_under_bombardment
+			value_for_planet_destruction = 1.0
+		}
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous owner: destroyed a ringworld section
+country_event = {
+	id = prob_notice.104
+	title = prob.ringworld_destroyed.owner.name
+	desc = prob.ringworld_destroyed.owner.desc
+	is_triggered_only = yes
+	location = event_target:prob_system_under_bombardment
+
+	picture = GFX_evt_megastructure_construction
+	show_sound = event_super_explosion
+
+	immediate = {
+		add_static_war_exhaustion = {
+			attacker = event_target:prob_bombarder
+			location = event_target:prob_system_under_bombardment
+			value_for_planet_destruction = 2.0
+		}
+	}
+
+	option = {
+		name = OK
+	}
+}
+
+# notice planet previous owner: captured a colony
+country_event = {
+	id = prob_notice.105
+	title = prob.colony_captured.owner.name
+	desc = prob.colony_captured.owner.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_ground_combat
+	show_sound = event_ground_battle
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous controller: a captured colony is lost (depopulated)
+country_event = {
+	id = prob_notice.201
+	title = prob.colony_depopulated.controller.name
+	desc = prob.colony_depopulated.controller.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_city_ruins
+	show_sound = event_super_explosion
+
+	trigger = {
+		NOT = { is_same_value = event_target:prob_owner_of_planet }
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous controller: a captured habitat is lost (glassed)
+country_event = {
+	id = prob_notice.202
+	title = prob.colony_glassed.controller.name
+	desc = prob.colony_glassed.controller.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_prob_molten_planet
+	show_sound = event_prob_molten_planet
+
+	trigger = {
+		NOT = { is_same_value = event_target:prob_owner_of_planet }
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous controller: a captured habitat is lost
+country_event = {
+	id = prob_notice.203
+	title = prob.colony_depopulated.controller.name
+	desc = prob.colony_depopulated.controller.desc
+	is_triggered_only = yes
+	location = event_target:prob_system_under_bombardment
+
+	picture = GFX_evt_large_explosion
+	show_sound = event_ship_explosion
+
+	trigger = {
+		NOT = { is_same_value = event_target:prob_owner_of_planet }
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous controller: destroyed a ringworld section
+country_event = {
+	id = prob_notice.204
+	title = prob.ringworld_destroyed.controller.name
+	desc = prob.ringworld_destroyed.controller.desc
+	is_triggered_only = yes
+	location = event_target:prob_system_under_bombardment
+
+	picture = GFX_evt_megastructure_construction
+	show_sound = event_super_explosion
+
+	trigger = {
+		NOT = { is_same_value = event_target:prob_owner_of_planet }
+	}
+
+	option = {
+		name = OK
+	}
+}
+
+# notice planet previous controller: captured a colony
+country_event = {
+	id = prob_notice.205
+	title = prob.colony_captured.controller.name
+	desc = prob.colony_captured.controller.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_ground_combat
+	show_sound = event_ground_battle
+
+	trigger = {
+		NOT = { is_same_value = event_target:prob_owner_of_planet }
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous controller: captured a colony (owner)
+country_event = {
+	id = prob_notice.206
+	title = prob.colony_regained.controller.name
+	desc = prob.colony_regained.controller.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_ground_combat
+	show_sound = event_ground_battle
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice bombarder: captured a colony (primitive)
+country_event = {
+	id = prob_notice.300
+	title = prob.primitive_conquered.bombarder.name
+	desc = prob.primitive_conquered.bombarder.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_ground_combat
+	show_sound = event_ground_battle
+
+	immediate = {
+		every_country = {
+			limit = {
+				has_communications = root
+				is_country_type = default
+				NOT = { is_same_value = root }
+			}
+			add_opinion_modifier = {
+				who = root
+				modifier = opinion_primitive_violation
+			}
+		}
+		reset_years_of_peace = yes
+	}
+
+	option = {
+		name = prob.primitive_destroyed.bombarder.option
+	}
+}
+
+# notice bombarder: destroyed a colony (primitive)
+country_event = {
+	id = prob_notice.301
+	title = prob.primitive_destroyed.bombarder.name
+	desc = prob.primitive_destroyed.bombarder.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_city_ruins
+	show_sound = event_super_explosion
+
+	immediate = {
+		reset_years_of_peace = yes
+	}
+
+	option = {
+		name = prob.primitive_destroyed.bombarder.option
+	}
+}
+
+# notice bombarder: glassed a colony (primitive)
+country_event = {
+	id = prob_notice.302
+	title = prob.primitive_glassed.bombarder.name
+	desc = prob.primitive_glassed.bombarder.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_prob_molten_planet
+	show_sound = event_prob_molten_planet
+
+	immediate = {
+		reset_years_of_peace = yes
+	}
+
+	option = {
+		name = prob.primitive_destroyed.bombarder.option
+	}
+}
+
+# notice planet previous owner: a colony is lost (infestation)
+country_event = {
+	id = prob_notice.401
+	title = prob.colony_infested.owner.name
+	desc = prob.colony_infested.owner.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_prob_prethoryn_infestation
+	show_sound = event_prob_prethoryn_infestation
+
+	option = {
+		name = TERRIBLE
+	}
+}
+
+# notice planet previous controller: a captured habitat is lost (infestation)
+country_event = {
+	id = prob_notice.402
+	title = prob.colony_infested.controller.name
+	desc = prob.colony_infested.controller.desc
+	is_triggered_only = yes
+	location = event_target:prob_planet_under_bombardment
+
+	picture = GFX_evt_prob_prethoryn_infestation
+	show_sound = event_prob_prethoryn_infestation
+
+	trigger = {
+		NOT = { is_same_value = event_target:prob_owner_of_planet }
+	}
+
+	option = {
+		name = TERRIBLE
+	}
+}

@@ -1,0 +1,7 @@
+
+prob_glassed_planet = {
+	icon = "gfx/interface/icons/planet_modifiers/prob_glassed_planet.dds"
+	icon_frame = 3
+
+	important = yes
+}

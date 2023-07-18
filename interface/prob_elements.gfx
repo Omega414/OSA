@@ -1,0 +1,25 @@
+spriteTypes = {
+	spriteType = {
+		name = "GFX_evt_prob_molten_planet"
+		texturefile = "gfx/event_pictures/prob_molten_planet.dds"
+		masking_texture = "gfx/interface/situation_log/event_mask.dds"
+		alwaystransparent = yes
+	}
+	spriteType = {
+		name = "GFX_evt_prob_prethoryn_infestation"
+		texturefile = "gfx/event_pictures/prob_prethoryn_infestation.dds"
+		masking_texture = "gfx/interface/situation_log/event_mask.dds"
+		alwaystransparent = yes
+	}
+
+	spriteType = {
+		name = "GFX_text_devastation"
+		texturefile = "gfx/interface/icons/text_icons/devastation.dds"
+	}
+
+	spriteType = {
+		name = "GFX_prob_total_war"
+		texturefile = "gfx/interface/icons/diplomacy/diplomacy_war.dds"
+		noOfFrames = 2
+	}
+}
