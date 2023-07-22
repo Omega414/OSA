@@ -71,7 +71,7 @@ building_mem_planetary_shield_generator = {
 	}
 	
 	ai_resource_production = {
-		alloys = 1
+		alloys = 15
 		trigger = {
 			always = yes
 		}
@@ -152,7 +152,7 @@ building_mem_planetary_shield_generator_heavy = {
 	}
 
 	ai_resource_production = {
-		alloys = 1
+		alloys = 20
 		trigger = {
 			always = yes
 		}
@@ -311,6 +311,13 @@ building_eac_pdf_base = {
 		text = job_eac_pdf_shipbuilder_effect_desc
 	}
 
+	ai_resource_production = {
+		alloys = 10
+		trigger = {
+			always = yes
+		}
+	}
+
 	is_essential = yes
 	
 }
@@ -389,8 +396,14 @@ eac_building_planetary_proton_cannon = {
 		text = job_eac_military_officer_energy_effect_desc
 	}
 
+	ai_resource_production = {
+		alloys = 10
+		trigger = {
+			always = yes
+		}
+	}
+
 	is_essential = yes
-	
 }
 
 eac_building_planetary_neutron_cannon = {
@@ -449,6 +462,13 @@ eac_building_planetary_neutron_cannon = {
 	
 	prerequisites = {
 		"tech_energy_torpedoes_2"
+	}
+
+	ai_resource_production = {
+		alloys = 15
+		trigger = {
+			always = yes
+		}
 	}
 
 }
@@ -520,6 +540,13 @@ eac_building_planetary_tachyon_cannon = {
 			owner = { is_gestalt = no }
 		}
 		text = job_eac_military_officer_energy_effect_desc
+	}
+
+	ai_resource_production = {
+		alloys = 20
+		trigger = {
+			always = yes
+		}
 	}
 
 }
@@ -597,6 +624,13 @@ eac_building_coilgun_batteries = {
 		text = job_eac_military_officer_kinetic_effect_desc
 	}
 
+	ai_resource_production = {
+		alloys = 10
+		trigger = {
+			always = yes
+		}
+	}
+
 	is_essential = yes
 
 }
@@ -650,7 +684,11 @@ eac_building_railgun_batteries = {
 			volatile_motes = 2
 		}
 	}
-	
+
+	upgrades = {
+		eac_building_gauss_batteries
+	}
+
 	prerequisites = {
 		"tech_mass_drivers_4"
 	}
@@ -668,6 +706,13 @@ eac_building_railgun_batteries = {
 			owner = { is_gestalt = no }
 		}
 		text = job_eac_military_officer_kinetic_effect_desc
+	}
+
+	ai_resource_production = {
+		alloys = 15
+		trigger = {
+			always = yes
+		}
 	}
 
 }
@@ -739,6 +784,13 @@ eac_building_gauss_batteries = {
 			owner = { is_gestalt = no }
 		}
 		text = job_eac_military_officer_kinetic_effect_desc
+	}
+
+	ai_resource_production = {
+		alloys = 20
+		trigger = {
+			always = yes
+		}
 	}
 
 }
