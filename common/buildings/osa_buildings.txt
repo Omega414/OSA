@@ -9,6 +9,10 @@ building_mem_planetary_shield_generator = {
 
 	allow = {
 		has_major_upgraded_capital = yes
+		OR = {
+			is_ai = no
+			num_pops >= 50
+		}
 	}
 		
 	planet_modifier = {
@@ -226,6 +230,10 @@ building_eac_pdf_base = {
 	
 	allow = {
 		has_upgraded_capital = yes
+		OR = {
+			is_ai = no
+			num_pops >= 50
+		}
 	}
 
 	triggered_planet_modifier = {
@@ -312,7 +320,7 @@ building_eac_pdf_base = {
 	}
 
 	ai_resource_production = {
-		alloys = 10
+		alloys = 20
 		trigger = {
 			always = yes
 		}
@@ -338,6 +346,10 @@ eac_building_planetary_proton_cannon = {
 	
 	allow = {
 		has_major_upgraded_capital = yes
+		OR = {
+			is_ai = no
+			num_pops >= 50
+		}
 	}
 
 	triggered_planet_modifier = {
@@ -346,7 +358,7 @@ eac_building_planetary_proton_cannon = {
 			owner = { is_regular_empire = yes }
 		}
 		modifier = {
-			job_eac_military_officer_energy_add = 1
+			job_eac_military_officer_energy_add = 2
 		}
 	}
 
@@ -496,7 +508,7 @@ eac_building_planetary_tachyon_cannon = {
 			owner = { is_regular_empire = yes }
 		}
 		modifier = {
-			job_eac_military_officer_energy_add = 3
+			job_eac_military_officer_energy_add = 2
 		}
 	}
 
@@ -566,6 +578,10 @@ eac_building_coilgun_batteries = {
 	
 	allow = {
 		has_major_upgraded_capital = yes
+		OR = {
+			is_ai = no
+			num_pops >= 50
+		}
 	}
 
 	triggered_planet_modifier = {
@@ -574,7 +590,7 @@ eac_building_coilgun_batteries = {
 			owner = { is_regular_empire = yes }
 		}
 		modifier = {
-			job_eac_military_officer_kinetic_add = 1
+			job_eac_military_officer_kinetic_add = 2
 		}
 	}
 
