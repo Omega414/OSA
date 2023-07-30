@@ -10,7 +10,10 @@ building_mem_planetary_shield_generator = {
 	allow = {
 		has_major_upgraded_capital = yes
 		OR = {
-			is_ai = no
+			exists = owner
+			owner = {
+				is_ai = no
+			}
 			num_pops >= 50
 		}
 	}
@@ -231,7 +234,10 @@ building_eac_pdf_base = {
 	allow = {
 		has_upgraded_capital = yes
 		OR = {
-			is_ai = no
+			exists = owner
+			owner = {
+				is_ai = no
+			}
 			num_pops >= 50
 		}
 	}
@@ -347,7 +353,10 @@ eac_building_planetary_proton_cannon = {
 	allow = {
 		has_major_upgraded_capital = yes
 		OR = {
-			is_ai = no
+			exists = owner
+			owner = {
+				is_ai = no
+			}
 			num_pops >= 50
 		}
 	}
@@ -579,7 +588,10 @@ eac_building_coilgun_batteries = {
 	allow = {
 		has_major_upgraded_capital = yes
 		OR = {
-			is_ai = no
+			exists = owner
+			owner = {
+				is_ai = no
+			}
 			num_pops >= 50
 		}
 	}

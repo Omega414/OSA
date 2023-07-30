@@ -25,11 +25,6 @@ prob_post_making_planet_uninhabitable = {
 }
 
 prob_pre_pseudo_terraforming = {
-	remove_modifier = natural_beauty
-	remove_modifier = atmospheric_aphrodisiac
-	remove_modifier = atmospheric_hallucinogen
-	remove_modifier = lush_planet
-	remove_modifier = dangerous_wildlife
 	every_deposit = {
 		limit = { is_deposit_type = prob_d_bombarded_land }
 		remove_deposit = yes

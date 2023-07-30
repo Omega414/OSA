@@ -117,7 +117,7 @@ leader_trait_science_navigator_3 = {
 		ICON = "GFX_leader_trait_navigator"
 		RARITY = common
 		COUNCIL = no
-		TIER = 2
+		TIER = 3
 	}
 	modifier = {
 		fleet_mia_time_mult = -0.6
