@@ -1289,7 +1289,16 @@ building_maintenance_depot = {
 	category = amenity
 
 	potential = {
-		owner = { is_gestalt = yes }
+		exists = owner
+		owner = {
+			is_gestalt = yes
+		}
+		OR = {
+			owner = {
+				is_ai = no
+			}
+			num_pops >= 50
+		}
 	}
 
 	destroy_trigger = {
